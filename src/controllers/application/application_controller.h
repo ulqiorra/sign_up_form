@@ -10,8 +10,12 @@ class ApplicationController : public QObject
     Q_OBJECT
 public:
     explicit ApplicationController();
-
     void initialize() noexcept;
+
+    ThemeControllerShared get_theme_controller() const noexcept;
+
+signals:
+    void changed();
 
 private:
     ThemeControllerShared _theme_controller;

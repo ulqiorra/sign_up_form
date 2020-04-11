@@ -2,5 +2,8 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>models/properties/ViewsProperties.qml</file>
+        <file>views/themes/LightTheme.qml</file>
+        <file>views/themes/DarkTheme.qml</file>
+        <file>controllers/theme/Theme.qml</file>
     </qresource>
 </RCC>

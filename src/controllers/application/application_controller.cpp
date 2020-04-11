@@ -14,5 +14,10 @@ ApplicationController::ApplicationController()
 
 void ApplicationController::initialize() noexcept
 {
-    qDebug() << "initializing app controller";
+    _theme_controller->initialize();
+}
+
+ThemeControllerShared ApplicationController::get_theme_controller() const noexcept
+{
+    return _theme_controller;
 }

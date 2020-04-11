@@ -1,7 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include <src/controllers/application/application_controller.h>
+#include <src/controllers/theme/theme_controller.h>
 #include <src/models/types/types_registrar.h>
 
 namespace
@@ -25,6 +27,9 @@ int main(int argc, char *argv[])
     types_registrar.register_types();
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("ApplicationController", application_controller.get());
+    engine.rootContext()->setContextProperty("ThemeController", application_controller->get_theme_controller().get());
+
     const QUrl url(main_qml_path.toString());
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

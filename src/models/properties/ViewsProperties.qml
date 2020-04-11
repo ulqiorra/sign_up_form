@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.10
+import QtQuick 2.12
 import QtQuick.Window 2.2
 
 //import SignUpForm.Model 1.0
@@ -54,5 +54,8 @@ Item
         property int default_margin: points(20)
         property int default_border_radius: points(5)
         property int default_padding: points(10)
+
+        property int default_window_height: points(500)
+        property int default_window_width: points(400)
     }
 }
