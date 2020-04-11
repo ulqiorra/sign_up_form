@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>models/properties/ViewsProperties.qml</file>
     </qresource>
 </RCC>

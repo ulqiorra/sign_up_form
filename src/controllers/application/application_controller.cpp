@@ -2,7 +2,12 @@
 
 #include <QDebug>
 
+#include <src/controllers/theme/theme_controller.h>
+
+ApplicationControllerShared application_controller;
+
 ApplicationController::ApplicationController()
+    : _theme_controller(std::make_shared<ThemeController>())
 {
 
 }

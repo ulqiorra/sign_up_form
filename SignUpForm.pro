@@ -15,7 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/controllers/application/application_controller.cpp \
+        src/controllers/theme/theme_controller.cpp \
         src/main.cpp \
+        src/models/types/types_registrar.cpp \
         src/models/user/user.cpp
 
 RESOURCES += src/qml.qrc
@@ -33,4 +35,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     src/controllers/application/application_controller.h \
+    src/controllers/theme/theme_controller.h \
+    src/models/types/types_registrar.h \
     src/models/user/user.h
