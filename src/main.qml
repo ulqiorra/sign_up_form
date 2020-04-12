@@ -79,6 +79,127 @@ Window
         color: "gray"
     }
 
+    Column
+    {
+        id: inputs_column
+
+        width: parent.width * 0.7
+        anchors.top: block_separator.bottom
+        anchors.topMargin: 20
+        anchors.left: parent.left
+        anchors.leftMargin: ViewsProperties.sizes.content_left_margin
+        spacing: 20
+
+        Row
+        {
+            height: 40
+            spacing: 20
+
+            Controls.ThemedTextInput
+            {
+                id: first_name_input
+
+                width: 155
+                height: 40
+                placeholder_text: "First Name"
+            }
+
+            Controls.ThemedTextInput
+            {
+                id: last_name_input
+
+                width: 155
+                height: 40
+                placeholder_text: "Last Name"
+            }
+        }
+
+        Controls.ThemedComboBox
+        {
+            id: country_combo_box
+
+            height: 40
+            width: 330
+            model: [ "blablabla", "olaolaola" ]
+        }
+
+        Controls.ThemedTextInput
+        {
+            id: email_input
+
+            width: 330
+            height: 40
+            placeholder_text: "Email"
+            text_input_validator: RegExpValidator
+            {
+                id: email_validator
+
+                regExp: /(.+)@(.+){2,}\.(.+){2,}/
+            }
+            onInput_active_focusChanged:
+            {
+                if (!activeFocus)
+                {
+                    if (is_input_acceptable)
+                    {
+                        reset_warning()
+                    }
+                    else if (current_text.length !== 0)
+                    {
+                        show_warning()
+                    }
+                    else
+                    {
+                        reset_warning()
+                    }
+                }
+            }
+        }
+
+        Controls.ThemedTextInput
+        {
+            id: password_input
+
+            width: 330
+            height: 40
+            placeholder_text: "Password"
+            input_echo_mode: TextInput.Password
+        }
+
+        Row
+        {
+            id: terms_of_use_row
+
+            height: 40
+            spacing: 20
+
+            Controls.ThemedCheckBox
+            {
+                id: terms_of_use_checkbox
+
+                anchors.verticalCenter: parent.verticalCenter
+                checked: false
+            }
+
+            Text
+            {
+                id: terms_of_user_label
+
+                anchors.verticalCenter: parent.verticalCenter
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+                text: "I accept the Terms of Use"
+                font
+                {
+                    pixelSize: 15
+                    weight: Font.Thin
+                }
+                color: "gray"
+                opacity: 0.6
+            }
+        }
+    }
+
     Controls.ThemedSwitch
     {
         id: theme_switch

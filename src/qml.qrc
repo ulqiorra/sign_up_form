@@ -6,5 +6,9 @@
         <file>views/themes/DarkTheme.qml</file>
         <file>controllers/theme/Theme.qml</file>
         <file>views/controls/ThemedSwitch.qml</file>
+        <file>views/controls/ThemedTextInput.qml</file>
+        <file>views/controls/ThemedComboBox.qml</file>
+        <file>views/controls/ThemedCheckBox.qml</file>
+        <file>views/controls/ThemedButton.qml</file>
     </qresource>
 </RCC>
