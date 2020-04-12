@@ -6,11 +6,19 @@ Item
     id: root
 
     property alias background: background
+    property alias fonts: fonts
 
     Item
     {
         id: background
 
-        property color default_color: "gray"
+        property color default_color: "#FFFFFF"
+    }
+
+    Item
+    {
+        id: fonts
+
+        property color default_color: "#000000"
     }
 }

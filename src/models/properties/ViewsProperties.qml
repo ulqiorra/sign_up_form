@@ -10,6 +10,7 @@ Item
     id: root
 
     property alias sizes: sizes
+    property alias durations: durations
     property real scale: Screen.width / 1920
     property real fontScale: Screen.width / 1920
     property real windowScale: Screen.width / 1920
@@ -48,14 +49,24 @@ Item
     Item
     {
         id: sizes
-//        property alias input_form: text_input_form
 
-        property int default_spacing: points(15)
-        property int default_margin: points(20)
-        property int default_border_radius: points(5)
-        property int default_padding: points(10)
+        property int default_spacing: points(10)
+        property int default_margin: points(10)
 
         property int default_window_height: points(500)
         property int default_window_width: points(400)
+
+        property int switch_button_height: points(25)
+        property int switch_button_width: points(45)
+
+        property int content_left_margin: points(35)
+        property int content_top_margin: points(25)
+    }
+
+    Item
+    {
+        id: durations
+
+        property int default_animation: 250
     }
 }

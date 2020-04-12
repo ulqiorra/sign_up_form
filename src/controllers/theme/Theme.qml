@@ -6,6 +6,7 @@ Item
     id: root
     property Item theme: theme_loader.item
     property Item background: theme.background
+    property Item fonts: theme.fonts
 
     onThemeChanged: ThemeController.set_theme_qml_object(root)
     Loader
