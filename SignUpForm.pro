@@ -20,7 +20,8 @@ SOURCES += \
         src/models/types/types_registrar.cpp \
         src/models/user/user.cpp
 
-RESOURCES += src/qml.qrc
+RESOURCES += src/qml.qrc \
+    res/res.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -38,3 +39,5 @@ HEADERS += \
     src/controllers/theme/theme_controller.h \
     src/models/types/types_registrar.h \
     src/models/user/user.h
+
+RC_ICONS = res/app_icon.ico

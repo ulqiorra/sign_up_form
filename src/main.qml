@@ -16,6 +16,16 @@ Window
     minimumHeight: ViewsProperties.sizes.default_window_height
     color: Theme.background.default_color
 
+    function reset_window()
+    {
+        first_name_input.current_text = ""
+        last_name_input.current_text = ""
+        country_combo_box.currentIndex = -1
+        email_input.current_text = ""
+        password_input.current_text = ""
+        terms_of_use_checkbox.checked = false
+    }
+
     Behavior on color
     {
         ColorAnimation
@@ -166,36 +176,41 @@ Window
             input_echo_mode: TextInput.Password
         }
 
-        Row
+        Controls.ThemedCheckBox
         {
-            id: terms_of_use_row
+            id: terms_of_use_checkbox
 
-            height: 40
-            spacing: 20
-
-            Controls.ThemedCheckBox
+            checked: false
+            spacing: 10
+            text: "I accept the Terms of Use"
+            font
             {
-                id: terms_of_use_checkbox
+                pixelSize: 15
+                weight: Font.Thin
+            }
+        }
 
-                anchors.verticalCenter: parent.verticalCenter
-                checked: false
+        Controls.ThemedButton
+        {
+            id: sign_up_button
+
+            width: 140
+            height: 40
+            text: "Sign Up"
+            enabled: first_name_input.current_text.length !== 0 &&
+                     country_combo_box.currentIndex !== -1 &&
+                     email_input.is_input_acceptable &&
+                     password_input.current_text.length !== 0 &&
+                     terms_of_use_checkbox.checked
+            font
+            {
+                pixelSize: 17
+                bold: true
             }
 
-            Text
+            onClicked:
             {
-                id: terms_of_user_label
-
-                anchors.verticalCenter: parent.verticalCenter
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignLeft
-                text: "I accept the Terms of Use"
-                font
-                {
-                    pixelSize: 15
-                    weight: Font.Thin
-                }
-                color: "gray"
-                opacity: 0.6
+                popup.open()
             }
         }
     }
@@ -216,6 +231,51 @@ Window
         onCheckedChanged:
         {
             ThemeController.change_theme(checked ? "light" : "dark")
+        }
+    }
+
+    Popup
+    {
+        id: popup
+
+        anchors.centerIn: parent
+        width: 300
+        height: 250
+        leftInset: 11
+        rightInset: 11
+        bottomInset: 11
+        topInset: 11
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: Theme.background.default_color
+        }
+
+        Controls.ThemedButton
+        {
+            id: sign_up_again_button
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            width: 150
+            height: 40
+            text: "Sign Up Again"
+            font
+            {
+                pixelSize: 17
+                bold: true
+            }
+
+            onClicked:
+            {
+                root.reset_window()
+                popup.close()
+            }
         }
     }
 }
