@@ -12,6 +12,7 @@ Window
 
     visible: true
     width: ViewsProperties.sizes.default_window_width
+    minimumWidth: ViewsProperties.sizes.min_window_width
     height: ViewsProperties.sizes.default_window_height
     minimumHeight: ViewsProperties.sizes.default_window_height
     color: Theme.background.default_color
@@ -100,16 +101,17 @@ Window
         anchors.leftMargin: ViewsProperties.sizes.content_left_margin
         spacing: 20
 
-        Row
+        Grid
         {
-            height: 40
-            spacing: 20
+            height: root.width >= 400 ? 40 : (40 * 2 + inputs_column.spacing)
+            spacing: root.width >= 400 ? root.width * 0.05 : inputs_column.spacing
+            columns: root.width >= 400 ? 2 : 1
 
             Controls.ThemedTextInput
             {
                 id: first_name_input
 
-                width: 155
+                width: root.width >= 400 ? root.width * 0.3875 : root.width * 0.825
                 height: 40
                 placeholder_text: "First Name"
             }
@@ -118,7 +120,7 @@ Window
             {
                 id: last_name_input
 
-                width: 155
+                width: root.width >= 400 ? root.width * 0.3875 : root.width * 0.825
                 height: 40
                 placeholder_text: "Last Name"
             }
@@ -129,15 +131,15 @@ Window
             id: country_combo_box
 
             height: 40
-            width: 330
-            model: [ "blablabla", "olaolaola" ]
+            width: root.width * 0.825
+            model: [ "Belarus", "Russia" ]
         }
 
         Controls.ThemedTextInput
         {
             id: email_input
 
-            width: 330
+            width: root.width * 0.825
             height: 40
             placeholder_text: "Email"
             text_input_validator: RegExpValidator
@@ -170,7 +172,7 @@ Window
         {
             id: password_input
 
-            width: 330
+            width: root.width * 0.825
             height: 40
             placeholder_text: "Password"
             input_echo_mode: TextInput.Password
@@ -253,6 +255,91 @@ Window
         {
             anchors.fill: parent
             color: Theme.background.default_color
+
+            Column
+            {
+                id: popup_content_column
+
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: 200
+                spacing: 10
+                clip: true
+
+                Text
+                {
+                    id: account_info
+
+                    font.pixelSize: 14
+                    color: Theme.fonts.default_color
+                    textFormat: Text.RichText
+                    text: "First Name: " + first_name_input.current_text +
+                          "<br>Last Name: " + last_name_input.current_text +
+                          "<br>Country: " + country_combo_box.currentText +
+                          "<br>Email: " + email_input.current_text
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                Row
+                {
+                    id: secured_row
+
+                    spacing: 0
+                    height: 20
+
+                    Text
+                    {
+                        id: password_label
+
+                        font.pixelSize: 14
+                        color: Theme.fonts.default_color
+                        text: "Password: "
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    TextInput
+                    {
+                        id: password_output
+
+                        echoMode: TextInput.Password
+                        font.pixelSize: 14
+                        color: Theme.fonts.default_color
+                        verticalAlignment: Text.AlignVCenter
+                        wrapMode: Text.Wrap
+                        width: 80
+                        text: password_input.current_text
+                    }
+
+                    Controls.ThemedButton
+                    {
+                        id: show_password_button
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 55
+                        height: 20
+                        text: password_output.echoMode === TextInput.Password ? "Show" : "Hide"
+                        font
+                        {
+                            pixelSize: 14
+                            bold: true
+                        }
+
+                        onClicked:
+                        {
+                            if (password_output.echoMode === TextInput.Password)
+                            {
+                                password_output.echoMode = TextInput.Normal
+                            }
+                            else
+                            {
+                                password_output.echoMode = TextInput.Password
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         Controls.ThemedButton

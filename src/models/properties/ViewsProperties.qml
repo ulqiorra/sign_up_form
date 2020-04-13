@@ -53,8 +53,9 @@ Item
         property int default_spacing: points(10)
         property int default_margin: points(10)
 
-        property int default_window_height: points(500)
+        property int default_window_height: points(550)
         property int default_window_width: points(400)
+        property int min_window_width: points(300)
 
         property int switch_button_height: points(25)
         property int switch_button_width: points(45)
