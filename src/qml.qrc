@@ -10,5 +10,7 @@
         <file>views/controls/ThemedComboBox.qml</file>
         <file>views/controls/ThemedCheckBox.qml</file>
         <file>views/controls/ThemedButton.qml</file>
+        <file>views/panels/SignUpPanel.qml</file>
+        <file>views/panels/AuthorizedInfoPanel.qml</file>
     </qresource>
 </RCC>
