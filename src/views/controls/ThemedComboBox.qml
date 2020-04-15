@@ -28,6 +28,11 @@ ComboBox
     property color popup_border_color: "#CBCBCB"
     property color popup_highlight_color: "#FFFFFF"
 
+    property int inform_duration: 2000
+    property int blink_duration: 200
+
+    property bool is_initialized: false
+
     function show_warning()
     {
         background_rect.border.color = root.background_border_warning_color
@@ -38,7 +43,50 @@ ComboBox
         background_rect.border.color = root.background_border_default_color
     }
 
-    Component.onCompleted: currentIndex = -1
+    function inform_user()
+    {
+        blink_timer.start()
+        inform_user_timer.start()
+    }
+
+    Timer
+    {
+        id: inform_user_timer
+
+        interval: root.inform_duration
+        running: false
+        repeat: false
+        onTriggered:
+        {
+            blink_timer.stop()
+            root.reset_warning()
+        }
+    }
+
+    Timer
+    {
+        id: blink_timer
+
+        repeat: true
+        interval: root.blink_duration
+        onTriggered:
+        {
+            if (background.border.color === root.background_border_warning_color)
+            {
+                root.reset_warning()
+            }
+            else
+            {
+                root.show_warning()
+            }
+        }
+    }
+
+    Component.onCompleted:
+    {
+        currentIndex = -1
+        root.is_initialized = true
+    }
 
     background: Rectangle
     {

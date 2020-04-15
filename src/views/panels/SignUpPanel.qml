@@ -27,6 +27,30 @@ Item
         terms_of_use_checkbox.checked = false
     }
 
+    function highlight_necessary_fields()
+    {
+        if (first_name_input.current_text.length === 0)
+        {
+            first_name_input.inform_user()
+        }
+        if (country_combo_box.currentIndex === -1)
+        {
+            country_combo_box.inform_user()
+        }
+        if (email_input.current_text.length === 0)
+        {
+            email_input.inform_user()
+        }
+        if (password_input.current_text.length === 0)
+        {
+            password_input.inform_user()
+        }
+        if (!terms_of_use_checkbox.checked)
+        {
+            terms_of_use_checkbox.inform_user()
+        }
+    }
+
     Controls.ThemedSwitch
     {
         id: theme_switch
@@ -136,6 +160,7 @@ Item
                        : root.width * root.content_width_ratio
                 height: root.input_height
                 placeholder_text: "First Name"
+                onEditFinished: root.highlight_necessary_fields()
             }
 
             Controls.ThemedTextInput
@@ -147,6 +172,7 @@ Item
                        : root.width * root.content_width_ratio
                 height: root.input_height
                 placeholder_text: "Last Name"
+                onEditFinished: root.highlight_necessary_fields()
             }
         }
 
@@ -157,6 +183,13 @@ Item
             height: root.input_height
             width: root.width * root.content_width_ratio
             model: ApplicationController.settings_controller.countries
+            onCurrentIndexChanged:
+            {
+                if (is_initialized)
+                {
+                    root.highlight_necessary_fields()
+                }
+            }
         }
 
         Controls.ThemedTextInput
@@ -190,6 +223,7 @@ Item
                     }
                 }
             }
+            onEditFinished: root.highlight_necessary_fields()
         }
 
         Controls.ThemedTextInput
@@ -200,6 +234,7 @@ Item
             height: root.input_height
             placeholder_text: "Password"
             input_echo_mode: TextInput.Password
+            onEditFinished: root.highlight_necessary_fields()
         }
 
         Controls.ThemedCheckBox
@@ -214,6 +249,7 @@ Item
                 pixelSize: ViewsProperties.sizes.terms_of_use_font
                 weight: Font.Thin
             }
+            onCheckedChanged: root.highlight_necessary_fields()
         }
 
         Controls.ThemedButton

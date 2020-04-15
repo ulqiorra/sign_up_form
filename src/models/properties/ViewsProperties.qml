@@ -91,6 +91,8 @@ Item
         id: durations
 
         property int default_animation: 250
+        property int inform_timer: 2000
+        property int blink_timer: 200
     }
 
     Item

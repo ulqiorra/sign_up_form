@@ -6,10 +6,65 @@ CheckBox
     id: root
 
     property color indicator_color: "#838383"
-    property color background_border_color: "#AA838383"
+    property color background_color: "#F3F3F3"
+    property color current_background_border_color: "#AA838383"
+    property color background_border_default_color: "#AA838383"
+    property color background_border_warning_color: "#FF0000"
     property color text_color: "gray"
 
+    property int inform_duration: 2000
+    property int blink_duration: 200
+
     property real text_opacity: 0.6
+
+    function show_warning()
+    {
+        root.current_background_border_color = root.background_border_warning_color
+    }
+
+    function reset_warning()
+    {
+        root.current_background_border_color = root.background_border_default_color
+    }
+
+    function inform_user()
+    {
+        blink_timer.start()
+        inform_user_timer.start()
+    }
+
+    Timer
+    {
+        id: inform_user_timer
+
+        interval: root.inform_duration
+        running: false
+        repeat: false
+        onTriggered:
+        {
+            blink_timer.stop()
+            root.reset_warning()
+        }
+    }
+
+    Timer
+    {
+        id: blink_timer
+
+        repeat: true
+        interval: root.blink_duration
+        onTriggered:
+        {
+            if (root.current_background_border_color === root.background_border_warning_color)
+            {
+                root.reset_warning()
+            }
+            else
+            {
+                root.show_warning()
+            }
+        }
+    }
 
     indicator: Rectangle
     {
@@ -18,8 +73,8 @@ CheckBox
         x: root.leftPadding
         y: parent.height / 2 - height / 2
         radius: 3
-        color: "#F3F3F3"
-        border.color: root.background_border_color
+        color: root.background_color
+        border.color: root.current_background_border_color
 
         Rectangle
         {

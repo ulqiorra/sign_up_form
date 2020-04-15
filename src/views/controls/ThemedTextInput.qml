@@ -21,9 +21,13 @@ Item
 
     property int font_size: 15
     property int maximum_text_length: 50
+    property int inform_duration: 2000
+    property int blink_duration: 200
 
     property var input_echo_mode: TextInput.Normal
     property var text_input_validator: null
+
+    signal editFinished()
 
     function show_warning()
     {
@@ -33,6 +37,45 @@ Item
     function reset_warning()
     {
         background.border.color = root.background_border_default_color
+    }
+
+    function inform_user()
+    {
+        blink_timer.start()
+        inform_user_timer.start()
+    }
+
+    Timer
+    {
+        id: inform_user_timer
+
+        interval: root.inform_duration
+        running: false
+        repeat: false
+        onTriggered:
+        {
+            blink_timer.stop()
+            root.reset_warning()
+        }
+    }
+
+    Timer
+    {
+        id: blink_timer
+
+        repeat: true
+        interval: root.blink_duration
+        onTriggered:
+        {
+            if (background.border.color === root.background_border_warning_color)
+            {
+                root.reset_warning()
+            }
+            else
+            {
+                root.show_warning()
+            }
+        }
     }
 
     Rectangle
@@ -111,6 +154,11 @@ Item
             {
                 placeholder_text.visible = text_input.text.length === 0
             }
+        }
+
+        onEditingFinished:
+        {
+            root.editFinished()
         }
     }
 }
