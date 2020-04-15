@@ -162,7 +162,7 @@ Item
 
             height: root.input_height
             width: root.width * root.content_width_ratio
-            model: [ "Belarus", "Russia" ]
+            model: ApplicationController.settings_controller.countries
         }
 
         Controls.ThemedTextInput

@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/controllers/application/application_controller.cpp \
+        src/controllers/settings/settings_controller.cpp \
         src/controllers/theme/theme_controller.cpp \
         src/main.cpp \
         src/models/types/types_registrar.cpp \
@@ -23,19 +24,19 @@ SOURCES += \
 RESOURCES += src/qml.qrc \
     res/res.qrc
 
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+extracopy.files += $$PWD/res/countries.xml
+extracopy.path = $$OUT_PWD
+
+COPIES += extracopy
+
 HEADERS += \
     src/controllers/application/application_controller.h \
+    src/controllers/settings/settings_controller.h \
     src/controllers/theme/theme_controller.h \
     src/models/types/types_registrar.h \
     src/models/user/user.h

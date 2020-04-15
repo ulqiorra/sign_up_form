@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<countries>
+ 	<country>
+ 		<code>3</code>
+ 		<name>Wonderland</name>
+ 	</country>
+ 	<country>
+ 		<code>8</code>
+ 		<name>Neverland</name>
+ 	</country>
+ 	<country>
+ 		<code>22</code>
+ 		<name>Disneyland</name>
+ 	</country>
+</countries>
