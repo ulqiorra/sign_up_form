@@ -14,6 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        src/controllers/account/account_controller.cpp \
         src/controllers/application/application_controller.cpp \
         src/controllers/settings/settings_controller.cpp \
         src/controllers/theme/theme_controller.cpp \
@@ -35,6 +36,7 @@ extracopy.path = $$OUT_PWD
 COPIES += extracopy
 
 HEADERS += \
+    src/controllers/account/account_controller.h \
     src/controllers/application/application_controller.h \
     src/controllers/settings/settings_controller.h \
     src/controllers/theme/theme_controller.h \

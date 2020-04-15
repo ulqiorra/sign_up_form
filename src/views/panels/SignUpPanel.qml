@@ -9,12 +9,6 @@ Item
 {
     id: root
 
-    property alias first_name: first_name_input.current_text
-    property alias last_name: last_name_input.current_text
-    property alias country: country_combo_box.currentText
-    property alias email: email_input.current_text
-    property alias password: password_input.current_text
-
     property int input_height: ViewsProperties.sizes.default_input_height
     property real content_width_ratio: ViewsProperties.ratios.default_content_width
     property real small_content_width_ratio: ViewsProperties.ratios.small_content_width
@@ -242,6 +236,9 @@ Item
 
             onClicked:
             {
+                ApplicationController.account_controller.sign_up(first_name_input.current_text, last_name_input.current_text,
+                                                                 country_combo_box.currentText, email_input.current_text,
+                                                                 password_input.current_text)
                 root.requestPopup()
             }
         }

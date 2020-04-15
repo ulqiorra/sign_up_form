@@ -9,12 +9,21 @@ Rectangle
 {
     id: root
 
-    property string first_name
-    property string last_name
-    property string country
-    property string email
-    property string password
-
+    property string first_name: ApplicationController.account_controller.current_user
+                                ? ApplicationController.account_controller.current_user.first_name
+                                : "Undefined"
+    property string last_name: ApplicationController.account_controller.current_user
+                               ? ApplicationController.account_controller.current_user.last_name
+                               : "Undefined"
+    property string country: ApplicationController.account_controller.current_user
+                             ? ApplicationController.account_controller.current_user.country
+                             : "Undefined"
+    property string email: ApplicationController.account_controller.current_user
+                           ? ApplicationController.account_controller.current_user.email
+                           : "Undefined"
+    property string password: ApplicationController.account_controller.current_user
+                              ? ApplicationController.account_controller.current_user.password
+                              : "Undefined"
     signal requestReset()
 
     anchors.fill: parent
@@ -123,6 +132,7 @@ Rectangle
 
         onClicked:
         {
+            ApplicationController.account_controller.log_out()
             root.requestReset()
         }
     }

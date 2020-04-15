@@ -51,12 +51,6 @@ Window
         {
             id: authorized_panel
 
-            first_name: sign_up_panel.first_name
-            last_name: sign_up_panel.last_name
-            country: sign_up_panel.country
-            email: sign_up_panel.email
-            password: sign_up_panel.password
-
             onRequestReset:
             {
                 sign_up_panel.reset_sign_up_panel()
